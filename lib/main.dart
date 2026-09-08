@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'title': '1/7 Scale PVC Figurine',
       'category': 'Collectibles',
-      'image': 'https://images.pexels.com/photos/163036/mario-luigi-yoshi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=600',
+      'image': 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop',
       'prompt': 'A high-detail 1/7 scale PVC anime figure on a collector desk, studio softbox lighting, ultra-realistic plastic textures.'
     },
     {
