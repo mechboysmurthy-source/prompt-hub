@@ -34,20 +34,20 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'title': 'Cyberpunk Warrior',
       'category': 'Cinematic',
-      'image': 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80',
+      'image': 'https://picsum.photos/id/1025/600/400',
       'prompt': 'A hyper-realistic cinematic 8k portrait of a cyberpunk warrior in neon-lit Tokyo rain, shallow depth of field, 85mm lens.'
     },
     {
       'title': '1/7 Scale PVC Figurine',
       'category': 'Collectibles',
-      'image': 'https://images.unsplash.com/photo-1563089145-599997674d42?w=600&auto=format&fit=crop&q=80',
+      'image': 'https://picsum.photos/id/1062/600/400',
       'prompt': 'A high-detail 1/7 scale PVC anime figure on a collector desk, studio softbox lighting, ultra-realistic plastic textures.'
     },
     {
       'title': 'Fantasy Sky Islands',
       'category': 'Landscape',
-      'image': 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80',
-      'prompt': 'Mythical floating islands with waterfalls falling into clouds, golden hour sunset, Unreal Engine 5 render.'
+      'image': 'https://picsum.photos/id/1036/600/400',
+      'prompt': 'Mythical floating islands with waterfalls falling into clouds, golden hour sunset, Unreal Engine 5 render style.'
     },
   ];
 
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 6),
                             Text(
                               item['prompt']!,
                               style: const TextStyle(color: Colors.white70, fontSize: 13, height: 1.3),
@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 icon: const Icon(Icons.copy, size: 16, color: Colors.white),
                                 label: const Text('Copy Prompt', style: TextStyle(color: Colors.white)),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
