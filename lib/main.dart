@@ -30,28 +30,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Map<String, String>> allPrompts = const [
+  final List<Map<String, dynamic>> allPrompts = const [
     {
       'title': 'Cyberpunk Warrior',
       'category': 'Cinematic',
-      'image': 'https://picsum.photos/id/1025/600/400',
+      'icon': Icons.smart_toy_rounded,
+      'gradient': [Color(0xFF8A2387), Color(0xFFE94057), Color(0xFFF27121)],
       'prompt': 'A hyper-realistic cinematic 8k portrait of a cyberpunk warrior in neon-lit Tokyo rain, shallow depth of field, 85mm lens.'
     },
     {
       'title': '1/7 Scale PVC Figurine',
       'category': 'Collectibles',
-      'image': 'https://picsum.photos/id/1062/600/400',
+      'icon': Icons.view_in_ar_rounded,
+      'gradient': [Color(0xFF11998e), Color(0xFF38ef7d)],
       'prompt': 'A high-detail 1/7 scale PVC anime figure on a collector desk, studio softbox lighting, ultra-realistic plastic textures.'
     },
     {
       'title': 'Fantasy Sky Islands',
       'category': 'Landscape',
-      'image': 'https://picsum.photos/id/1036/600/400',
+      'icon': Icons.landscape_rounded,
+      'gradient': [Color(0xFF2b5876), Color(0xFF4e4376)],
       'prompt': 'Mythical floating islands with waterfalls falling into clouds, golden hour sunset, Unreal Engine 5 render style.'
     },
   ];
 
-  List<Map<String, String>> displayedPrompts = [];
+  List<Map<String, dynamic>> displayedPrompts = [];
 
   @override
   void initState() {
@@ -63,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       displayedPrompts = allPrompts
           .where((p) =>
-              p['title']!.toLowerCase().contains(query.toLowerCase()) ||
-              p['category']!.toLowerCase().contains(query.toLowerCase()))
+              p['title']!.toString().toLowerCase().contains(query.toLowerCase()) ||
+              p['category']!.toString().toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -111,13 +114,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.network(
-                        item['image']!,
+                      Container(
                         height: 150,
                         width: double.infinity,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            Container(height: 150, color: Colors.grey[900], child: const Icon(Icons.image)),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: item['gradient'],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            item['icon'],
+                            size: 64,
+                            color: Colors.white.withOpacity(0.9),
+                          ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(12),
