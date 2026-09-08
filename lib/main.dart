@@ -49,6 +49,18 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=600',
       'prompt': 'Mythical floating islands with waterfalls falling into clouds, golden hour sunset, Unreal Engine 5 render style.'
     },
+    {
+      'title': 'Minimalist Logo Icon',
+      'category': 'Design',
+      'image': 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop',
+      'prompt': 'Modern minimalist geometric logo of a fox, vector flat design, gradient colors, dark background, behance trending.'
+    },
+    {
+      'title': 'Isometric Cozy Room',
+      'category': '3D Art',
+      'image': 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop',
+      'prompt': 'Isometric cute 3D miniature bedroom with soft pastel lighting, tiny houseplants, mechanical keyboard, Blender 3D render.'
+    },
   ];
 
   List<Map<String, String>> displayedPrompts = [];
