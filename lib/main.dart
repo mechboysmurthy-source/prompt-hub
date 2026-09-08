@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:share_plus/share_plus.dart';
 
 void main() {
   runApp(const PromptApp());
@@ -172,22 +173,39 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: const TextStyle(color: Colors.white70, fontSize: 13, height: 1.3),
                             ),
                             const SizedBox(height: 12),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.deepPurpleAccent,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton.icon(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.deepPurpleAccent,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                    ),
+                                    onPressed: () {
+                                      Clipboard.setData(ClipboardData(text: item['prompt']!));
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Prompt Copied!')),
+                                      );
+                                    },
+                                    icon: const Icon(Icons.copy, size: 16, color: Colors.white),
+                                    label: const Text('Copy', style: TextStyle(color: Colors.white)),
+                                  ),
                                 ),
-                                onPressed: () {
-                                  Clipboard.setData(ClipboardData(text: item['prompt']!));
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Prompt Copied!')),
-                                  );
-                                },
-                                icon: const Icon(Icons.copy, size: 16, color: Colors.white),
-                                label: const Text('Copy Prompt', style: TextStyle(color: Colors.white)),
-                              ),
+                                const SizedBox(width: 8),
+                                ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF2A2A3C),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                  onPressed: () {
+                                    Share.share(
+                                      '${item['title']} AI Prompt:\n\n${item['prompt']}\n\nShared from AI Prompt Hub',
+                                    );
+                                  },
+                                  icon: const Icon(Icons.share, size: 16, color: Colors.white),
+                                  label: const Text('Share', style: TextStyle(color: Colors.white)),
+                                ),
+                              ],
                             ),
                           ],
                         ),
