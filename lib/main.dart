@@ -30,31 +30,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Map<String, dynamic>> allPrompts = const [
+  final List<Map<String, String>> allPrompts = const [
     {
       'title': 'Cyberpunk Warrior',
       'category': 'Cinematic',
-      'icon': Icons.smart_toy_rounded,
-      'gradient': [Color(0xFF8A2387), Color(0xFFE94057), Color(0xFFF27121)],
+      'image': 'https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=600',
       'prompt': 'A hyper-realistic cinematic 8k portrait of a cyberpunk warrior in neon-lit Tokyo rain, shallow depth of field, 85mm lens.'
     },
     {
       'title': '1/7 Scale PVC Figurine',
       'category': 'Collectibles',
-      'icon': Icons.view_in_ar_rounded,
-      'gradient': [Color(0xFF11998e), Color(0xFF38ef7d)],
+      'image': 'https://images.pexels.com/photos/163036/mario-luigi-yoshi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=600',
       'prompt': 'A high-detail 1/7 scale PVC anime figure on a collector desk, studio softbox lighting, ultra-realistic plastic textures.'
     },
     {
       'title': 'Fantasy Sky Islands',
       'category': 'Landscape',
-      'icon': Icons.landscape_rounded,
-      'gradient': [Color(0xFF2b5876), Color(0xFF4e4376)],
+      'image': 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=600',
       'prompt': 'Mythical floating islands with waterfalls falling into clouds, golden hour sunset, Unreal Engine 5 render style.'
     },
   ];
 
-  List<Map<String, dynamic>> displayedPrompts = [];
+  List<Map<String, String>> displayedPrompts = [];
 
   @override
   void initState() {
@@ -66,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       displayedPrompts = allPrompts
           .where((p) =>
-              p['title']!.toString().toLowerCase().contains(query.toLowerCase()) ||
-              p['category']!.toString().toLowerCase().contains(query.toLowerCase()))
+              p['title']!.toLowerCase().contains(query.toLowerCase()) ||
+              p['category']!.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -114,21 +111,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        height: 150,
+                      Image.network(
+                        item['image']!,
+                        height: 180,
                         width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: item['gradient'],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            item['icon'],
-                            size: 64,
-                            color: Colors.white.withOpacity(0.9),
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, progress) {
+                          if (progress == null) return child;
+                          return Container(
+                            height: 180,
+                            color: const Color(0xFF1E1E2C),
+                            child: const Center(child: CircularProgressIndicator()),
+                          );
+                        },
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          height: 180,
+                          color: const Color(0xFF1E1E2C),
+                          child: const Center(
+                            child: Icon(Icons.broken_image_rounded, color: Colors.white38, size: 40),
                           ),
                         ),
                       ),
