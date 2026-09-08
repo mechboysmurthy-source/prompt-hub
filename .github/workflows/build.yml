@@ -23,9 +23,19 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Prepare Android and Permissions
+        run: |
+          rm -rf android
+          flutter create . --platforms=android --org com.mechboy.prompthub
+          python3 -c "
+          p = 'android/app/src/main/AndroidManifest.xml'
+          with open(p, 'r') as f: c = f.read()
+          c = c.replace('<application', '<uses-permission android:name=\"android.permission.INTERNET\"/>\n    <uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>\n    <application android:usesCleartextTraffic=\"true\"')
+          with open(p, 'w') as f: f.write(c)
+          "
+
       - name: Build APK
         run: |
-          flutter create . --platforms=android --org com.mechboy.prompthub
           flutter pub get
           flutter build apk --release
 
