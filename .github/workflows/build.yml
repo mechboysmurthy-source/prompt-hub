@@ -23,16 +23,15 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Setup Android and Force Internet Permission
+      - name: Generate Android Skeleton
         run: |
-          flutter create . --platforms=android
-          python3 -c "
-          p = 'android/app/src/main/AndroidManifest.xml'
-          with open(p, 'r') as f: content = f.read()
-          if 'android.permission.INTERNET' not in content:
-              content = content.replace('<manifest', '<manifest\n    <uses-permission android:name=\"android.permission.INTERNET\"/>')
-              with open(p, 'w') as f: f.write(content)
-          "
+          flutter create . --platforms=android --org com.mechboy.prompthub
+          sed -i '/<manifest/a \    <uses-permission android:name="android.permission.INTERNET"/>' android/app/src/main/AndroidManifest.xml
+          sed -i '/<manifest/a \    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>' android/app/src/main/AndroidManifest.xml
+          cat android/app/src/main/AndroidManifest.xml
+
+      - name: Build APK
+        run: |
           flutter pub get
           flutter build apk --release
 
