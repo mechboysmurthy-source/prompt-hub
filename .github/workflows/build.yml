@@ -23,9 +23,10 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Generate Android Files and Build APK
+      - name: Generate Android Files and Add Internet Permission
         run: |
           flutter create . --platforms=android
+          sed -i '/<manifest/a \    <uses-permission android:name="android.permission.INTERNET"\/>' android/app/src/main/AndroidManifest.xml
           flutter pub get
           flutter build apk --release
 
