@@ -23,14 +23,9 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Generate Android Skeleton and Permissions
-        run: |
-          flutter create . --platforms=android --org com.mechboy.prompthub
-          sed -i '/<manifest/a \    <uses-permission android:name="android.permission.INTERNET"/>' android/app/src/main/AndroidManifest.xml
-          sed -i '/<manifest/a \    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>' android/app/src/main/AndroidManifest.xml
-
       - name: Build APK
         run: |
+          flutter create . --platforms=android --org com.mechboy.prompthub
           flutter pub get
           flutter build apk --release
 
